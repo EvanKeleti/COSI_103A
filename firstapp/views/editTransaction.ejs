@@ -1,0 +1,13 @@
+<h1>Edit Transaction</h1>
+<form method="post" action="/transaction/updateTransactionItem">
+<input type="hidden" name="transactionId" value="<%= transaction._id %>">
+  <input type="text" name="description" value="<%= transaction.description %>">
+  <br>
+  <input type="text" name="category" value="<%= transaction.category %>">
+  <br>
+  <input type="text" name="amount" value="<%= transaction.amount %>">
+  <br>
+  <input type="text" name="date" value="<%= transaction.date.toLocaleDateString('en-US') %>">
+  <br>
+  <input type="submit" value="store">
+</form>
