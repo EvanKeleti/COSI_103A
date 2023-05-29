@@ -1,0 +1,76 @@
+<h1> Transactions for <%= user.username %>
+</h1>
+<br>
+
+<div class="row m-3">
+  <div class="col">
+    <a class="btn btn-lg btn-primary" href="/transaction/groupByCategory">group by category</a>
+  </div>
+  <div class="col">
+    <a class="btn btn-lg btn-primary" href="?sortBy=category">sort by category</a>
+  </div>
+  <div class="col">
+    <a class="btn btn-lg btn-primary" href="?sortBy=amount">sort by amount</a>
+  </div>
+  <div class="col">
+    <a class="btn btn-lg btn-primary" href="?sortBy=description">sort by description</a>
+  </div>
+  <div class="col">
+    <a class="btn btn-lg btn-primary" href="?sortBy=date">sort by date</a>
+  </div>
+</div>
+
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Delete</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% transactions.map(transaction=> { %>
+      <tr>
+        <td>
+          <%= transaction.description %>
+        </td>
+        <td>
+          <%= transaction.amount %>
+        </td>
+        <td>
+          <%= transaction.category %>
+        </td>
+        <td>
+          <%= transaction.date.toDateString() %>
+        </td>
+        <td>
+          <a href="/transaction/delete/<%= transaction._id %>">
+            <i class="bi bi-trash"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/transaction/edit/<%= transaction._id %>">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<h1>Add a New Transaction</h1>
+<form method="post" action="transaction">
+  <input type="text" name="description" placeholder="description">
+  <br>
+  <input type="text" name="category" placeholder="category">
+  <br>
+  <input type="text" name="amount" placeholder="amount">
+  <br>
+  <input type="text" name="date" placeholder="mm/dd/yyyy">
+  <br>
+  <input type="submit" value="store">
+</form>
