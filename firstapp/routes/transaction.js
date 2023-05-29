@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const TransactionItem = require('../models/TransactionItem')
-const User = require('../models/User')
+const User = require('../models/User');
+const { isLoggedIn } = require('./pwauth');
 
 router.get('/transaction', isLoggedIn, async (req, res, next) => {
 	let sortOptions = {};
@@ -23,7 +24,26 @@ router.post('/transaction', isLoggedIn, async (req, res, next) => {
 })
 
 router.get('/transaction/groupByCategory', isLoggedIn, async (req, res, next) => {
-	
+
+})
+
+router.get('/transaction/delete/:transactionId', isLoggedIn, async (req, res, next) => {
+	await TransactionItem.deleteOne({ _id: req.params.transactionId });
+	res.redirect('/transaction');
+})
+
+router.get('/transaction/edit/:transactionId', isLoggedIn, async (req, res, next) => {
+	const transaction = await TransactionItem.findById(req.params.transactionId);
+	res.render('editTransaction', { transaction });
+})
+
+router.post('/transaction/updateTransactionItem', isLoggedIn, async (req, res, next) => {
+	const { transactionId, description, category, amount, date } = req.body;
+	await TransactionItem.findOneAndUpdate(
+		{ _id: transactionId },
+		{ $set: { description, category, amount, date: new Date(date) } }
+	)
+	res.redirect('/transaction')
 })
 
 module.exports = router;
