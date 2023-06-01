@@ -8,7 +8,7 @@ const transactionItemSchema = Schema( {
   amount: Number,
   category: String,
   date: Date,
-  userId: {type:ObjectId, ref:'user' }
+  userId: { type: ObjectId, ref:'user' }
 } );
 
 module.exports = mongoose.model( 'TransactionItem', transactionItemSchema );
