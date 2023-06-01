@@ -31,7 +31,8 @@ router.get('/transaction/groupByCategory', isLoggedIn, async (req, res, next) =>
 		{ $group: {
 			_id: "$category",
 			total: { $sum: "$amount" }
-		}}
+		}},
+		{ $sort: { _id: 1 } }
 	]);
 	//res.json(categories);
 	res.render('transactionsByCategory', { categories });
