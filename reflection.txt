@@ -1,0 +1,33 @@
+1. What did you personally do on the project?
+
+Since I worked on the assignment alone, I did all of the work myself. A quick summary is: making the transaction schema; 
+creating a router with the transaction routes; adding sorting through query parameters; adding delete and edit functionality;
+adding grouping by category; and creating the views for the default table, grouped table, and edit form.
+
+2. How many hours did you work on this project?
+
+I don't remember exactly how long it took me, but it was probably somewhere between 3-6 hours.
+
+3. What (if anything) was most challenging, and why?
+
+A good portion of the time I worked for was spent troubleshooting an error with '$match' in the group by category aggregate 
+function. I had to do a lot of googling to figure out why I wasn't able to match the TransactionItems that had the current 
+user's ObjectId in the userId field.
+
+The fix was to change the match parameters from this:
+
+{ $match: { userId: req.user._id } }
+
+to this:
+
+{ $match: { userId: new mongoose.Types.ObjectId(req.user._id) } }
+
+I am still not fully understanding of the reason why this is necessary, but apparently, unlike in the find() function, $match needs
+an explicit cast in order to compare ObjectIds. 
+
+4. What did you learn (if anything) by completing this project?
+
+I learned a lot doing this project. It was my first time working with JavaScript, and I also gained more experience with html.
+I also gained a better understanding of how routes work, and how the browser interacts with a server through requests and 
+responses. For example, now that I understand the three common ways of sending information to the server from the browser
+(forms, URL parameters, and query parameters), I can now notice these three methods in action on the various websites I visit.
