@@ -7,6 +7,7 @@ const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
+const gptRouter = require('./routes/gpt');
 
 const User = require('./models/User');
 
@@ -15,6 +16,7 @@ const User = require('./models/User');
 /* **************************************** */
 const mongodb_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/pwdemo';
 console.log('MONGODB_URI=',process.env.MONGODB_URI);
+console.log('OPENAI_API_KEY=', process.env.OPENAI_API_KEY);
 
 const mongoose = require( 'mongoose' );
 
@@ -108,6 +110,7 @@ app.get('/about',
 
 app.use(toDoRouter);
 app.use(weatherRouter);
+app.use(gptRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
