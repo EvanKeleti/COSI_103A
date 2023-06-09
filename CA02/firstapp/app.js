@@ -108,6 +108,10 @@ app.get('/about',
   }
 )
 
+app.get('/team', isLoggedIn, (req, res, next) => {
+  res.render('team');
+});
+
 app.use(toDoRouter);
 app.use(weatherRouter);
 app.use(gptRouter);
