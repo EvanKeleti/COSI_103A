@@ -1,0 +1,9 @@
+<br>
+<h1><%= header %></h1>
+<p></p>
+<br>
+<form method="post" action="/openai-demo">
+  <input type="hidden" value="<%= promptStart %>" name="promptStart">
+  <input type="text" name="prompt" placeholder="<%= promptStart || 'Type your prompt here!'%>" size="80">
+  <input type="submit" value="Submit">
+</form>
